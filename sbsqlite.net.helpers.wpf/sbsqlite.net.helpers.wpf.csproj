@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="if &quot;$(ConfigurationName)&quot; == &quot;Release&quot; (&#xA;    copy &quot;$(TargetDir)\*.dll&quot; &quot;E:\code\libs\&quot;&#xA;)&#xD;&#xA;if &quot;$(ConfigurationName)&quot; == &quot;Debug&quot; (&#xA;    echo &quot;DEBUG: Not copying lib&quot;&#xA;)" />
+  </Target>
+
+  <ItemGroup>
+    <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
+    <PackageReference Include="sqlite-net-sqlcipher" Version="1.9.172" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="sbwpf.Core">
+      <HintPath>..\..\libs\sbwpf.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
